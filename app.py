@@ -12,11 +12,12 @@ from plot_utils import style_streamlit_plot
 # --- FIX THIS SECTION ---
 if not os.path.exists('random_forest.pkl'):
     with st.spinner("Training model..."):
-        subprocess.run(["python", "train_models.py"]) # Added 's' and indented 4 spaces
+        # Change 'src/train_models.py' to just 'train_models.py'
+        subprocess.run(["python", "train_models.py"])
 
 
-print(os.path.exists('hotel_bookings.csv'))
-# ------------------- Page config -------------------
+# Change this:
+df = pd.read_csv('hotel_bookings.csv')# ------------------- Page config -------------------
 st.set_page_config(page_title="StaySerene Predictor", layout="wide")
 
 # ------------------- Background styling (restored) -------------------
@@ -75,13 +76,12 @@ st.markdown(f"""
 # ------------------- Load artifacts (hotel models) -------------------
 @st.cache_resource
 def load_hotel_models():
-    # We removed 'models/' because the files are in the main folder on your GitHub
+    # Remove 'models/' from all these lines
     rf = joblib.load('random_forest.pkl')
     xgb = joblib.load('xgboost.pkl')
     scaler = joblib.load('scaler.pkl')
     columns = joblib.load('columns.pkl')
     return rf, xgb, scaler, columns
-
 
 try:
     rf, xgb, scaler, columns = load_hotel_models()
