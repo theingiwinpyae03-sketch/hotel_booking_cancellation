@@ -9,11 +9,10 @@ import joblib
 from sklearn.preprocessing import StandardScaler
 from plot_utils import style_streamlit_plot
 # This logic must come AFTER the import streamlit line
+# --- FIX THIS SECTION ---
 if not os.path.exists('random_forest.pkl'):
     with st.spinner("Training model..."):
-ubprocess.run(["python", "train_models.py"])
-
-
+        subprocess.run(["python", "train_models.py"]) # Added 's' and indented 4 spaces
 
 
 print(os.path.exists('hotel_bookings.csv'))
