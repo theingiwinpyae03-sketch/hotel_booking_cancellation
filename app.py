@@ -13,8 +13,7 @@ from plot_utils import style_streamlit_plot
 if not os.path.exists('random_forest.pkl'):
     with st.spinner("Training model..."):
         # Change 'src/train_models.py' to just 'train_models.py'
-        subprocess.run(["python", "train_models.py"])
-
+subprocess.run(["python", "train_models.py"])
 
 # Change this:
 df = pd.read_csv('hotel_bookings.csv')# ------------------- Page config -------------------
@@ -76,8 +75,8 @@ st.markdown(f"""
 # ------------------- Load artifacts (hotel models) -------------------
 @st.cache_resource
 def load_hotel_models():
-    # Remove 'models/' from all these lines
-    rf = joblib.load('random_forest.pkl')
+    # Remove 'models/' from all four lines below
+    rf = joblib.load('random_forest.pkl') 
     xgb = joblib.load('xgboost.pkl')
     scaler = joblib.load('scaler.pkl')
     columns = joblib.load('columns.pkl')
