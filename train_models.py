@@ -17,8 +17,8 @@ from sklearn.ensemble import RandomForestClassifier
 from xgboost import XGBClassifier
 ...
 # 1. Load data
-df = load_and_clean_data('data/hotel_bookings.csv')
-
+# To this (since the CSV is in your main folder):
+df = load_and_clean_data('hotel_bookings.csv')
 # 2. Prepare features and target
 X = df.drop(['is_canceled', 'financial_loss'], axis=1)
 y = df['is_canceled']
@@ -57,11 +57,11 @@ for name, model in [('Random Forest', rf), ('XGBoost', xgb)]:
     f1 = f1_score(y_test, y_pred)
     print(f"{name} -> Acc:{acc:.4f}, Prec:{prec:.4f}, Rec:{rec:.4f}, F1:{f1:.4f}")
 
-# 9. Save everything
-joblib.dump(rf, 'models/random_forest.pkl')
-joblib.dump(xgb, 'models/xgboost.pkl')
-joblib.dump(scaler, 'models/scaler.pkl')
-joblib.dump(X_train.columns.tolist(), 'models/columns.pkl')
+# Change these lines:
+joblib.dump(rf, 'random_forest.pkl') # Removed 'models/'
+joblib.dump(xgb, 'xgboost.pkl')      # Removed 'models/'
+joblib.dump(scaler, 'scaler.pkl')    # Removed 'models/'
+joblib.dump(X_train.columns.tolist(), 'columns.pkl') # Removed 'models/'
 # --- At the bottom of train_models.py ---
 # ============================================================
 # ASSOCIATION RULES FOR CANCELLATIONS (Integrated)
