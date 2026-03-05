@@ -1,17 +1,6 @@
+import streamlit as st
 import os
 import subprocess
-
-# 1. Create folders if they don't exist
-os.makedirs('models', exist_ok=True)
-os.makedirs('data', exist_ok=True)
-
-# 2. Check if the Random Forest model is missing
-if not os.path.exists('models/random_forest.pkl'):
-    with st.spinner("Large model missing. Training now... please wait."):
-        # This runs your training script automatically on the server
-        subprocess.run(["python", "src/train_models.py"])
-
-import streamlit as st
 import pandas as pd
 import numpy as np
 import matplotlib.pyplot as plt
@@ -19,7 +8,16 @@ import seaborn as sns
 import joblib
 from sklearn.preprocessing import StandardScaler
 from plot_utils import style_streamlit_plot
-import os
+# This logic must come AFTER the import streamlit line
+if not os.path.exists('random_forest.pkl'):
+    with st.spinner("Training model..."):
+        subprocess.run(["python", "train_models.py"])
+
+
+
+
+
+
 print(os.path.exists('hotel_bookings.csv'))
 # ------------------- Page config -------------------
 st.set_page_config(page_title="StaySerene Predictor", layout="wide")
