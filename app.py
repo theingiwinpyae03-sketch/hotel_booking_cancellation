@@ -10,9 +10,10 @@ from sklearn.preprocessing import StandardScaler
 from plot_utils import style_streamlit_plot
 # This logic must come AFTER the import streamlit line
 # --- FIX THIS SECTION ---
+# Line 14
 if not os.path.exists('random_forest.pkl'):
     with st.spinner("Training model..."):
-        # Change 'src/train_models.py' to just 'train_models.py'
+        subprocess.run(["python", "train_models.py"]) # <--- MUST HAVE 4 SPACES HERE
 subprocess.run(["python", "train_models.py"])
 
 # Change this:
