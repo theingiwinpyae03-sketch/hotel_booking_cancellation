@@ -11,9 +11,7 @@ from plot_utils import style_streamlit_plot
 # This logic must come AFTER the import streamlit line
 if not os.path.exists('random_forest.pkl'):
     with st.spinner("Training model..."):
-        subprocess.run(["python", "train_models.py"])
-
-
+ubprocess.run(["python", "train_models.py"])
 
 
 
@@ -78,10 +76,11 @@ st.markdown(f"""
 # ------------------- Load artifacts (hotel models) -------------------
 @st.cache_resource
 def load_hotel_models():
-    rf = joblib.load('models/random_forest.pkl')
-    xgb = joblib.load('models/xgboost.pkl')
-    scaler = joblib.load('models/scaler.pkl')
-    columns = joblib.load('models/columns.pkl')
+    # We removed 'models/' because the files are in the main folder on your GitHub
+    rf = joblib.load('random_forest.pkl')
+    xgb = joblib.load('xgboost.pkl')
+    scaler = joblib.load('scaler.pkl')
+    columns = joblib.load('columns.pkl')
     return rf, xgb, scaler, columns
 
 
@@ -121,8 +120,7 @@ if new_analysis_clicked:
 # ------------------- Load cleaned dataset for analysis pages -------------------
 from src.data_preprocessing import load_and_clean_data
 
-df = load_and_clean_data('data/hotel_bookings.csv')
-
+df = pd.read_csv('hotel_bookings.csv')
 # ===================== PAGE: PREDICTOR =====================
 if st.session_state.page == 'predictor':
     st.markdown('<p class="main-title">StaySerene – Cancellation Predictor</p>', unsafe_allow_html=True)
